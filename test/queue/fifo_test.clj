@@ -15,5 +15,12 @@
   (testing "pushing into an existing queue increases its size by one"
     (let [queue (new-queue)
           added-queue (push queue "First")]
-      (is (= (size added-queue) 1)))))
+      (is (= (size added-queue) 1))))
+
+  (testing "pushing two elements into an existing queue with one element increases its size by one"
+    (let [queue (new-queue)
+          queue2 (push queue "First")
+          queue3 (push queue2 "Second")]
+      (prn "HERE IS ADDED QUEUE 2" queue3)
+      (is (= (size queue3) 2)))))
 
