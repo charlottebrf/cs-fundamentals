@@ -15,6 +15,8 @@
 (defn push [queue element]
   (if (nil? (get queue :content))
     (assoc queue :content element)
-    (assoc queue :next (nested-queue element))
+    (let [next-queue (get queue :next)
+          updated-queue (push next-queue element)]
+      (assoc queue :next updated-queue))
     ))
 

@@ -19,8 +19,14 @@
 
   (testing "pushing two elements into an existing queue with one element increases its size by one"
     (let [queue (new-queue)
-          queue2 (push queue "First")
-          queue3 (push queue2 "Second")]
-      (prn "HERE IS ADDED QUEUE 2" queue3)
-      (is (= (size queue3) 2)))))
+          queue1 (push queue "First")
+          queue2 (push queue1 "Second")]
+      (is (= (size queue2) 2))))
+
+  (testing "pushing three elements into an existing queue with two elements increases size by one"
+    (let [queue (new-queue)
+          queue1 (push queue "First")
+          queue2 (push queue1 "Second")
+          queue3 (push queue2 "Three")]
+      (is (= (size queue3) 3)))))
 
