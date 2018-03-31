@@ -28,5 +28,11 @@
           queue1 (push queue "First")
           queue2 (push queue1 "Second")
           queue3 (push queue2 "Three")]
-      (is (= (size queue3) 3)))))
+      (is (= (size queue3) 3))))
+
+  (testing "popping out of an existing queue decreases its size by one"
+    (let [queue (new-queue)
+          added-queue (push queue "First")
+          removed-queue (special-pop added-queue)]
+      (is (= (size removed-queue) 0)))))
 
