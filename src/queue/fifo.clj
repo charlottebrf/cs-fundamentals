@@ -20,12 +20,12 @@
       (assoc queue :next updated-queue))
     ))
 
-;if the value is nil I have reached the send-off
-;when you pop size it shrinks by 1
-;break the link between the list on the :next
+;queue and thing popped
+;check thing popped is what was expected to be popped
 
 (defn special-pop [queue]
   (if (some? (get queue :content))
-    (dissoc queue :content)
-      queue))
+    (let [popped-element (get queue :content)
+          updated-queue (dissoc queue :content)]
+      (vector updated-queue popped-element))))
 

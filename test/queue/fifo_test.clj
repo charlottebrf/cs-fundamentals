@@ -30,9 +30,23 @@
           queue3 (push queue2 "Three")]
       (is (= (size queue3) 3))))
 
-  (testing "popping out of an existing queue decreases its size by one"
+  (testing "popping out an existing queue returns a tupple of the new queue and popped element"
     (let [queue (new-queue)
           added-queue (push queue "First")
-          removed-queue (special-pop added-queue)]
-      (is (= (size removed-queue) 0)))))
+          result (special-pop added-queue)]
+      (is (= result [{:next nil} "First"])))))
+  ;
+  ;(testing "popping out of an existing queue decreases its size by one"
+  ;  (let [queue (new-queue)
+  ;        added-queue (push queue "First")
+  ;        removed-queue (special-pop added-queue)]
+  ;    (is (= (size removed-queue) 0))))
+  ;
+  ;(testing "popping out of an existing queue with two elements decreases its size by two"
+  ;  (let [queue (new-queue)
+  ;        first-queue (push queue "First")
+  ;        second-queue (push first-queue "Second")
+  ;        removed-queue-1 (special-pop second-queue)
+  ;        removed-queue-2 (special-pop removed-queue-1)]
+  ;    (is (= (size removed-queue-2) 0)))))
 
