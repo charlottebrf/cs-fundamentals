@@ -20,10 +20,16 @@
       (assoc queue :next updated-queue))
     ))
 
-(defn special-pop [queue]
+(defn fifo-pop [queue]
   (if (= (size queue) 0)
     (vector (new-queue) nil)
     (let [content-value (queue :content)
           popped-queue (queue :next)]
       (vector popped-queue content-value))))
+
+(defn lifo-pop [queue]
+  (if (= (size queue) 0)
+    (vector (new-queue) nil))
+  (if (some? (get queue :next))
+    (get-in queue [:next :content])))
 

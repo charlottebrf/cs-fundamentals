@@ -28,20 +28,21 @@
   (testing "popping out an existing queue returns a tuple of the new queue containing the popped element"
     (let [queue (new-queue)
           added-queue (push queue "Apple")
-          [_ elem] (special-pop added-queue)]
-      (is (= elem "Apple"))))
+          [_ elem] (fifo-pop added-queue)]
+      (is (= elem "Apple")))))
 
+(deftest queues-fifo
   (testing "popping out of an existing queue decreases its size to zero"
     (let [queue (new-queue)
           added-queue (push queue "Apple")
-          removed-queue (special-pop added-queue)]
+          removed-queue (fifo-pop added-queue)]
       (is (= (size removed-queue) 0))))
 
   (testing "popping out of an existing queue of two decreases its size to one"
     (let [queue (new-queue)
           first-queue (push queue "Apple")
           second-queue (push first-queue "Bannana")
-          [q _] (special-pop second-queue)]
+          [q _] (fifo-pop second-queue)]
       (is (= (size q) 1))))
 
   (testing "popping out of an existing queue of three decreases its size to two"
@@ -49,12 +50,21 @@
           first-queue (push queue "Apple")
           second-queue (push first-queue "Bannana")
           third-queue (push second-queue "Cherry")
-          [q _] (special-pop third-queue)]
+          [q _] (fifo-pop third-queue)]
       (is (= (size q) 2))))
 
   (testing "popping out of an empty queue will have the same size of zero"
     (let [queue (new-queue)
-          [removed-queue _] (special-pop queue)]
+          [removed-queue _] (fifo-pop queue)]
       (is (= (size removed-queue) 0)))))
+
+(deftest queues-lifo
+  (testing "popping a queue will give its head = the last thing in"
+    (let [queue (new-queue)
+          first-queue (push queue "Apple")
+          second-queue (push first-queue "Bannana")
+          result (lifo-pop second-queue)]
+      (is (= result "Bannana")))))
+
 
 
