@@ -30,23 +30,32 @@
           queue3 (push queue2 "Three")]
       (is (= (size queue3) 3))))
 
-  (testing "popping out an existing queue returns a tupple of the new queue and popped element"
+  (testing "popping out an existing queue returns a tuple of the new queue and popped element"
     (let [queue (new-queue)
           added-queue (push queue "First")
           result (special-pop added-queue)]
-      (is (= result [{:next nil} "First"])))))
-  ;
-  ;(testing "popping out of an existing queue decreases its size by one"
-  ;  (let [queue (new-queue)
-  ;        added-queue (push queue "First")
-  ;        removed-queue (special-pop added-queue)]
-  ;    (is (= (size removed-queue) 0))))
-  ;
-  ;(testing "popping out of an existing queue with two elements decreases its size by two"
-  ;  (let [queue (new-queue)
-  ;        first-queue (push queue "First")
-  ;        second-queue (push first-queue "Second")
-  ;        removed-queue-1 (special-pop second-queue)
-  ;        removed-queue-2 (special-pop removed-queue-1)]
-  ;    (is (= (size removed-queue-2) 0)))))
+      (is (= result [{:next nil} "First"]))))
+
+  (testing "popping out of an existing queue decreases its size by one"
+    (let [queue (new-queue)
+          added-queue (push queue "First")
+          removed-queue (special-pop added-queue)]
+      (is (= (size removed-queue) 0))))
+
+  (testing "popping an existing queue of two elements returns a tuple of the new queue and popped element"
+    (let [queue (new-queue)
+          first-queue (push queue "First")
+          second-queue (push first-queue "Second")
+          result (special-pop second-queue)]
+      (prn "HERE IS THE RESULT" result)
+      (is (= result [{:next {:content "Second"}} "First"]))))
+
+  (testing "popping out one element from an existing queue with two elements decreases its size by one"
+    (let [queue (new-queue)
+          first-queue (push queue "First")
+          second-queue (push first-queue "Second")
+          removed-queue-1 (special-pop second-queue)
+          updated-map-only (first removed-queue-1)]
+      (is (= (size (updated-map-only :next)) 1)))))
+
 

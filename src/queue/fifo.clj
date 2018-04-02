@@ -8,7 +8,7 @@
 
 (defn size [queue]
   (if (some? (get queue :content))
-    (+ 1 (size (queue :next)))
+    (do (+ 1 (size (queue :next))))
     0))
 
 
@@ -20,12 +20,11 @@
       (assoc queue :next updated-queue))
     ))
 
-;queue and thing popped
-;check thing popped is what was expected to be popped
-
 (defn special-pop [queue]
-  (if (some? (get queue :content))
-    (let [popped-element (get queue :content)
-          updated-queue (dissoc queue :content)]
-      (vector updated-queue popped-element))))
+  (let [content-element (get queue :content)
+        updated-queue (dissoc queue :content)]
+    (if (some? content-element)
+      (do (vector updated-queue content-element))
+      (do (special-pop (get updated-queue :next)))
+      )))
 
