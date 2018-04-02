@@ -26,11 +26,16 @@
           popped-queue (queue :next)]
       (vector popped-queue content-value))))
 
-(defn lifo-pop [queue]
-  (if (= (size queue) 0)
-    (vector (new-queue) nil))
+(defn final-node-content [queue]
   (let [next (get queue :next)]
     (if (= (size next) 0)
       (queue :content)
-      (lifo-pop (queue :next)))))
+      (final-node-content (queue :next)))))
+
+(defn lifo-pop [queue]
+  (if (= (size queue) 0)
+    (vector (new-queue) nil))
+  (final-node-content queue))
+
+
 
