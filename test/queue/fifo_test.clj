@@ -59,12 +59,20 @@
       (is (= (size removed-queue) 0)))))
 
 (deftest queues-lifo
-  (testing "popping a queue will give its head = the last thing in"
+  (testing "popping a queue with two elements will give its head = the second thing in"
     (let [queue (new-queue)
           first-queue (push queue "Apple")
           second-queue (push first-queue "Bannana")
           result (lifo-pop second-queue)]
-      (is (= result "Bannana")))))
+      (is (= result "Bannana"))))
+
+  (testing "same as above with three"
+    (let [queue (new-queue)
+          first-queue (push queue "Apple")
+          second-queue (push first-queue "Bannana")
+          third-queue (push second-queue "Cherry")
+          result (lifo-pop third-queue)]
+      (is (= result "Cherry")))))
 
 
 
