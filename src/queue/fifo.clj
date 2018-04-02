@@ -24,7 +24,7 @@
   (let [content-element (get queue :content)
         updated-queue (dissoc queue :content)]
     (if (some? content-element)
-      (do (vector updated-queue content-element))
+      (do (vector (updated-queue :next) content-element))
       (do (special-pop (get updated-queue :next)))
       )))
 

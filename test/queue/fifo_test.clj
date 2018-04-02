@@ -34,7 +34,7 @@
     (let [queue (new-queue)
           added-queue (push queue "First")
           result (special-pop added-queue)]
-      (is (= result [{:next nil} "First"]))))
+      (is (= result [nil "First"]))))
 
   (testing "popping out of an existing queue decreases its size by one"
     (let [queue (new-queue)
@@ -47,15 +47,13 @@
           first-queue (push queue "First")
           second-queue (push first-queue "Second")
           result (special-pop second-queue)]
-      (prn "HERE IS THE RESULT" result)
-      (is (= result [{:next {:content "Second"}} "First"]))))
+      (is (= result [{:content "Second"} "First"]))))
 
   (testing "popping out one element from an existing queue with two elements decreases its size by one"
     (let [queue (new-queue)
           first-queue (push queue "First")
           second-queue (push first-queue "Second")
-          removed-queue-1 (special-pop second-queue)
-          updated-map-only (first removed-queue-1)]
-      (is (= (size (updated-map-only :next)) 1)))))
+          removed-queue-1 (special-pop second-queue)]
+      (is (= (size (first removed-queue-1)) 1)))))
 
 
