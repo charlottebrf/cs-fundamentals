@@ -54,6 +54,22 @@
           first-queue (push queue "First")
           second-queue (push first-queue "Second")
           removed-queue-1 (special-pop second-queue)]
-      (is (= (size (first removed-queue-1)) 1)))))
+      (is (= (size (first removed-queue-1)) 1))))
+
+  (testing "popping an existing queue of three elements returns a tuple of the new queue and popped element"
+    (let [queue (new-queue)
+          first-queue (push queue "First")
+          second-queue (push first-queue "Second")
+          third-queue (push second-queue "Third")
+          removed-queue-1 (special-pop third-queue)]
+      (is (= removed-queue-1 [{:content "Second" :next {:content "Third"}} "First"]))))
+
+  (testing "popping out one element from existing queue of three elements decreases its size by one"
+    (let [queue (new-queue)
+          first-queue (push queue "First")
+          second-queue (push first-queue "Second")
+          third-queue (push second-queue "Third")
+          removed-queue-1 (special-pop third-queue)]
+      (is (= (size (first removed-queue-1)) 2)))))
 
 
