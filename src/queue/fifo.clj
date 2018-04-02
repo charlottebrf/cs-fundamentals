@@ -21,11 +21,9 @@
     ))
 
 (defn special-pop [queue]
-  (let [content-value (queue :content)
-        popped-queue (dissoc queue :content)
-        popped-queue-without-next (popped-queue :next)]
-    (if (some? content-value)
-      (vector popped-queue-without-next content-value)
-      (special-pop popped-queue-without-next)
-      )))
+  (if (= (size queue) 0)
+    (vector (new-queue) nil)
+    (let [content-value (queue :content)
+          popped-queue (queue :next)]
+      (vector popped-queue content-value))))
 

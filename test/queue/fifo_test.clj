@@ -2,11 +2,6 @@
   (:require [clojure.test :refer :all]
             [queue.fifo :refer :all]))
 
-
-;Create a queue with a First-In-First-Out (FIFO) data structure.
-
-;empty
-;given an element it will return a list containing that element
 (deftest queues
   (testing "a new queue has size zero"
     (let [queue (new-queue)]
@@ -14,62 +9,52 @@
 
   (testing "pushing into an existing queue increases its size by one"
     (let [queue (new-queue)
-          added-queue (push queue "First")]
+          added-queue (push queue "Apple")]
       (is (= (size added-queue) 1))))
 
-  (testing "pushing two elements into an existing queue with one element increases its size by one"
+  (testing "pushing a second elements into an existing queue of one element increases its size by one"
     (let [queue (new-queue)
-          queue1 (push queue "First")
-          queue2 (push queue1 "Second")]
+          queue1 (push queue "Apple")
+          queue2 (push queue1 "Bannana")]
       (is (= (size queue2) 2))))
 
-  (testing "pushing three elements into an existing queue with two elements increases size by one"
+  (testing "pushing a third elements into an existing queue with two elements increases size by one"
     (let [queue (new-queue)
-          queue1 (push queue "First")
-          queue2 (push queue1 "Second")
-          queue3 (push queue2 "Three")]
+          queue1 (push queue "Apple")
+          queue2 (push queue1 "Bannana")
+          queue3 (push queue2 "Cherry")]
       (is (= (size queue3) 3))))
 
-  (testing "popping out an existing queue returns a tuple of the new queue and popped element"
+  (testing "popping out an existing queue returns a tuple of the new queue containing the popped element"
     (let [queue (new-queue)
-          added-queue (push queue "First")
-          result (special-pop added-queue)]
-      (is (= result [nil "First"]))))
+          added-queue (push queue "Apple")
+          [_ elem] (special-pop added-queue)]
+      (is (= elem "Apple"))))
 
-  (testing "popping out of an existing queue decreases its size by one"
+  (testing "popping out of an existing queue decreases its size to zero"
     (let [queue (new-queue)
-          added-queue (push queue "First")
+          added-queue (push queue "Apple")
           removed-queue (special-pop added-queue)]
       (is (= (size removed-queue) 0))))
 
-  (testing "popping an existing queue of two elements returns a tuple of the new queue and popped element"
+  (testing "popping out of an existing queue of two decreases its size to one"
     (let [queue (new-queue)
-          first-queue (push queue "First")
-          second-queue (push first-queue "Second")
-          result (special-pop second-queue)]
-      (is (= result [{:content "Second"} "First"]))))
+          first-queue (push queue "Apple")
+          second-queue (push first-queue "Bannana")
+          [q _] (special-pop second-queue)]
+      (is (= (size q) 1))))
 
-  (testing "popping out one element from an existing queue with two elements decreases its size by one"
+  (testing "popping out of an existing queue of three decreases its size to two"
     (let [queue (new-queue)
-          first-queue (push queue "First")
-          second-queue (push first-queue "Second")
-          removed-queue-1 (special-pop second-queue)]
-      (is (= (size (first removed-queue-1)) 1))))
+          first-queue (push queue "Apple")
+          second-queue (push first-queue "Bannana")
+          third-queue (push second-queue "Cherry")
+          [q _] (special-pop third-queue)]
+      (is (= (size q) 2))))
 
-  (testing "popping an existing queue of three elements returns a tuple of the new queue and popped element"
+  (testing "popping out of an empty queue will have the same size of zero"
     (let [queue (new-queue)
-          first-queue (push queue "First")
-          second-queue (push first-queue "Second")
-          third-queue (push second-queue "Third")
-          removed-queue-1 (special-pop third-queue)]
-      (is (= removed-queue-1 [{:content "Second" :next {:content "Third"}} "First"]))))
-
-  (testing "popping out one element from existing queue of three elements decreases its size by one"
-    (let [queue (new-queue)
-          first-queue (push queue "First")
-          second-queue (push first-queue "Second")
-          third-queue (push second-queue "Third")
-          removed-queue-1 (special-pop third-queue)]
-      (is (= (size (first removed-queue-1)) 2)))))
+          [removed-queue _] (special-pop queue)]
+      (is (= (size removed-queue) 0)))))
 
 
