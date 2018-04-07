@@ -11,4 +11,6 @@
   (testing "an empty word does not appear in the alphabet"
     (is (= (in-alphabet? nil) false)))
   (testing "letters outside the alphabet are not found in the alphabet"
-    (is (= (in-alphabet? "y") false))))
+    (is (= (in-alphabet? :y) false)))
+  (testing "multiple letters outside the alphabet are not found in the alphabet"
+    (is (= (in-alphabet? [:x :y :z])))))
