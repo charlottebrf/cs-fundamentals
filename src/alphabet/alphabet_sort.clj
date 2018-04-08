@@ -7,14 +7,8 @@
   (contains? alphabet letter))
 
 (defn in-alphabet? [word]
-  (let [[first & rest] word]
-    (prn "HERE IS FIRST" first)
-    (prn "HERE IS REST" rest)
-    (if (= (count rest) 0)
-      (do
-        (if (= (check-letter first) false)
-          false))
-      (do
-        (if (= (check-letter first) true)
-          (in-alphabet? rest)
-          true)))))
+  (if (= (count word) 0)
+    false
+    (let [[first & rest] word]
+      (if (prn "HERE IS CHECK LETTER" (check-letter first))
+        (in-alphabet? rest)))))
