@@ -10,7 +10,10 @@
   (into #{} (map keyword word)))
 
 (defn in-alphabet? [word]
-  false)
-
-
+  (let [translated-word (translate word)
+        first-from-set (first translated-word)
+        popped-set (pop (into [] translated-word))
+        is-letter-in-alphabet (check-letter first-from-set)]
+    (if (true? ((some? popped-set) is-letter-in-alphabet))
+      (in-alphabet? popped-set))))
 
