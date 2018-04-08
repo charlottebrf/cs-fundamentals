@@ -7,9 +7,7 @@
   (contains? alphabet letter))
 
 (defn translate [word]
-  (if (nil? word)
-    #{}
-    (into #{} (map keyword word))))
+  (into #{} (map keyword word)))
 
 (defn in-alphabet? [word]
   false)
