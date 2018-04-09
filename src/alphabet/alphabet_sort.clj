@@ -6,9 +6,11 @@
 (defn check-letter [letter]
   (contains? alphabet letter))
 
-(defn in-alphabet? [word]
-  (if (= (count word) 0)
-    false
-    (let [[first & rest] word]
-      (if (prn "HERE IS CHECK LETTER" (check-letter first))
-        (in-alphabet? rest)))))
+(defn in-alphabet?
+  ([word] (in-alphabet? word false))
+  ([word provisional-result]
+   (if (= (count word) 0)
+     provisional-result
+     (let [[first-letter & remaining] word
+           provisional-result (check-letter first-letter)]
+       (in-alphabet? remaining provisional-result)))))
