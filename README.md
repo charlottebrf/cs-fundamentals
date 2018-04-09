@@ -8,10 +8,11 @@ Download the project from:
 `git@github.com:charlottebrf/cs-fundamentals.git`
 
 ## Usage
-Run the Clojure Tests:
+Navigate to the main repository:
+`cd data-structures-exercises`
 
-`cd data-structures-exercises
-lein test`
+Run the Clojure Tests:
+`lein test`
 
 ## Description
 **The first kata, fifo,** explores the concept of [queues](https://en.wikipedia.org/wiki/Queue_(abstract_data_type)). It creates and manages the size of its queues via custom methods: to create a new queue, check its size, pop and push functions. 
