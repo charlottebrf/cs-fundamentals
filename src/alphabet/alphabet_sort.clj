@@ -13,4 +13,6 @@
      provisional-result
      (let [[first-letter & remaining] word
            provisional-result (check-letter first-letter)]
-       (in-alphabet? remaining provisional-result)))))
+       (if (= provisional-result false)
+         false
+         (in-alphabet? remaining provisional-result))))))

@@ -20,7 +20,9 @@
     (is (= (in-alphabet? '("a" "d")) true)))
   (testing "a letter from and one not from alphabet are not found"
     (is (= (in-alphabet? '("a" "x")) false)))
-  (testing "multiple letters from and not from alphabet are not found"
-    (is (= (in-alphabet? '("x" "b" "y" "a" )) false))))
+  (testing "multiple letters not and from alphabet are not found"
+    (is (= (in-alphabet? '("x" "b" "y" "a" )) false)))
+  (testing "multiple letters from and not in alphabet are not found"
+    (is (= (in-alphabet? '("b" "!" "a" "?" )) false))))
 
 
