@@ -7,6 +7,10 @@
     (is (= (count alphabet) 10))
     (is (= (type alphabet) clojure.lang.PersistentHashSet))))
 
+(deftest turns-word-into-list
+  (testing "given a string of words will return a list of each letter"
+    (is (= (word-to-list "hey") '("y" "e" "h")))))
+
 (deftest check-word
   (testing "an empty word is not found in the alphabet"
     (is (= (in-alphabet? '()) false)))

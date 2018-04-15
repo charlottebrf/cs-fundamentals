@@ -6,6 +6,9 @@
 (def alphabet-two
   {:a "d" :b "b" :c "c" :d "d" :e "e" :f "f" :g "g" :h "h" :i "i" :j "j"})
 
+(defn word-to-list [word]
+  (into (list) (clojure.string/split word #"")))
+
 (defn- check-letter [letter]
   (contains? alphabet letter))
 
