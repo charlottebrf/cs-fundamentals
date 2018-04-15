@@ -48,6 +48,24 @@
   (testing "multiple letters from and not in alphabet are not found"
     (is (= (in-alphabet-version-two? '("b" "!" "a" "?"))))))
 
+(deftest check-word-version-three
+  (testing "an empty word is not found in the alphabet"
+    (is (= (in-alphabet-version-three? "") false)))
+  (testing "a letter outside the alphabet is not found"
+    (is (= (in-alphabet-version-three? "y") false)))
+  (testing "multiple letters outside the alphabet are not found"
+    (is (= (in-alphabet-version-three? "xyz") false)))
+  (testing "a letter in the alphabet is found"
+    (is (= (in-alphabet-version-three? "a") true)))
+  (testing "multi[le letters from the alphabet are found"
+    (is (= (in-alphabet-version-three? "ad") true)))
+  (testing "a letter from and one not from alphabet are not found"
+    (is (= (in-alphabet-version-three? "ax") false)))
+  (testing "multiple letters not and from alphabet are not found"
+    (is (= (in-alphabet-version-three? "xbya") false)))
+  (testing "multiple letters from and not in alphabet are not found"
+    (is (= (in-alphabet-version-three? "b!a?")))))
+
 
 
 

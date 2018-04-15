@@ -37,3 +37,8 @@
       (if (= current-result false)
         false
         (in-alphabet-version-two? remaining current-result))))))
+
+
+(defn in-alphabet-version-three? [word]
+  (let [translated-word (word-to-list word)]
+    (in-alphabet-version-two? translated-word)))
