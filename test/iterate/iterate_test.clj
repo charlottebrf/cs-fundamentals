@@ -12,7 +12,11 @@
       (is (= (sum-numbers [2 2 2]) 6)))
     (testing "Converts a vector to a set"
       (is (= (convert-to-set [:a :b :c]) #{:a :b :c})))
-    (comment
+    (testing "Add one collection to another"
+      (is (= (add-collections [1 2 3] [4 5 6]))))
     (testing "if a number is below 10 then store it in the new set"
-      (is (= (numbers-under-ten [1 2 3 4 5]) #{1 2 3 4 5})))))
+      (is (= (numbers-under-ten [1 2 3 4 5]) #{1 2 3 4 5}))))
+
+;next test case
+;[7 4 3] => [7777777 4444 333]
 

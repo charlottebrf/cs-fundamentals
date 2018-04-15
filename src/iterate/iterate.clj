@@ -6,9 +6,14 @@
 (defn convert-to-set [numbers]
   (reduce conj #{} numbers))
 
-;(defn numbers-under-ten [random-numbers]
-;  (reduce
-;    (fn [acc random-numbers]
-;      (if (= random-numbers < 10)
-;        conj random-numbers
-;        acc) #{}) random-numbers))
+(defn add-collections [collection1 collection2]
+  (reduce conj collection1 collection2))
+
+(defn numbers-under-ten [random-numbers]
+  (reduce
+    (fn [acc random-numbers]
+      (if (= acc < 10)
+        (conj acc)
+        acc))
+    #{}
+    random-numbers))
